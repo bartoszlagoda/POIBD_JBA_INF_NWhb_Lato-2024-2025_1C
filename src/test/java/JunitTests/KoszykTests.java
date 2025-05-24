@@ -9,6 +9,6 @@ public class KoszykTests {
         System.out.println("Stworzenie produktów:");
         System.out.println("=====================");
         Produkt marchewka = new Produkt("marchewka",3.99,"warzywo",true);
-        System.out.println(marchewka.toString());;
+        System.out.println(marchewka.toString());
     }
 }
