@@ -1,0 +1,5 @@
+package org.example;
+
+public enum Kategoria {
+    OWOCE_I_WARZYWA,NABIAL,NAPOJE,PIECZYWO,MIESO_I_WEDLINY,SLODYCZE,CHEMIA_GOSPODARCZA
+}
