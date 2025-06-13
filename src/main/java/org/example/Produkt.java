@@ -35,6 +35,10 @@ public class Produkt {
         this.aktywny = aktywny;
     }
 
+    public void zwiekszStan(int ile){
+        this.stan += ile;
+    }
+
     @Override
     public String toString() {
         return nazwa + " - " + cena + " zł";

@@ -10,6 +10,7 @@ public class Koszyk {
     private final Katalog katalog;
 
     public Koszyk(Katalog katalog){
+        logInfo("================= TWÓJ KOSZYK ====================");
         this.katalog = katalog;
         this.produkty = new HashMap<>();
     }
@@ -19,6 +20,7 @@ public class Koszyk {
 
         if(produkt == null){
             logInfo(nazwa + " nie istnieje w katalogu lub jest niedostępna/y");
+            return;
         }
         produkty.put(produkt, produkty.getOrDefault(produkt,0) + ilosc);
     }
@@ -39,7 +41,6 @@ public class Koszyk {
             logInfo("Koszyk jest pusty");
             return;
         }
-        logInfo("================= TWÓJ KOSZYK ====================");
         produkty.forEach((produkt, ilosc) -> logInfo(produkt.getNazwa() + ", " + ilosc + " szt."));
     }
 

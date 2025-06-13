@@ -3,6 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static Utils.Logs.logInfo;
@@ -71,5 +72,15 @@ public class Katalog {
                 .filter(p -> p.getNazwa().equalsIgnoreCase(nazwa) && p.isAktywny())
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void dodajProdukt(Produkt nowyProdukt, int ilosc){
+        for (Produkt p : produkty){
+            if(p.getNazwa().equalsIgnoreCase(nowyProdukt.getNazwa())){
+                p.zwiekszStan(nowyProdukt.getStan());
+                return;
+            }
+        }
+        produkty.add(nowyProdukt);
     }
 }
