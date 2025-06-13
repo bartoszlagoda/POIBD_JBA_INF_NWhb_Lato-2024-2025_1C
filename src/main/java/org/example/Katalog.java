@@ -5,11 +5,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static Utils.Logs.logInfo;
+
 public class Katalog {
     private List<Produkt> produkty;
 
     public Katalog(){
-        System.out.println("Konstruktor : Katalog");
+        logInfo("========================= KATALOG PRODUKTOW =========================");
         produkty = new ArrayList<>();
 
         produkty.add(new Produkt("Mleko 2% 1L",3.49,Kategoria.NABIAL,25,true));
@@ -37,7 +39,9 @@ public class Katalog {
         produkty.add(new Produkt("Herbatniki 200g", 2.99, Kategoria.SLODYCZE, 30, true));
         produkty.add(new Produkt("Cola 1.5L", 4.49, Kategoria.NAPOJE, 50, true));
 
-        System.out.println("Zaktualizowano katalog");
+        produkty.stream().forEach(p -> logInfo(p.toString()));
+
+        logInfo("=====================================================================");
     }
 
     public List<Produkt> getProdukty() {
@@ -51,11 +55,15 @@ public class Katalog {
                 .collect(Collectors.toList());
     }
 
-    public List<String> wypiszProduktyDostepnZKategorii(Kategoria kategoria){
+    public List<String> wypiszProduktyDostepneZKategorii(Kategoria kategoria){
         return produkty.stream()
                 .filter(p -> p.isAktywny() && p.getKategoria() == kategoria)
                 .sorted(Comparator.comparingDouble(Produkt::getCena))
                 .map(Produkt::toString)
                 .collect(Collectors.toList());
+    }
+
+    public boolean zawieraProdukt(Produkt produkt){
+        return produkty.contains(produkt) && produkt.isAktywny();
     }
 }
