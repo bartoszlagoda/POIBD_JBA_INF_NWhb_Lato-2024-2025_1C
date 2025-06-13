@@ -66,4 +66,10 @@ public class Katalog {
     public boolean zawieraProdukt(Produkt produkt){
         return produkty.contains(produkt) && produkt.isAktywny();
     }
+    public Produkt znajdzProduktPoNazwie(String nazwa){
+        return produkty.stream()
+                .filter(p -> p.getNazwa().equalsIgnoreCase(nazwa) && p.isAktywny())
+                .findFirst()
+                .orElse(null);
+    }
 }

@@ -14,12 +14,13 @@ public class Koszyk {
         this.produkty = new HashMap<>();
     }
 
-    public void dodajProdukt(Produkt produkt){
-        if(!katalog.zawieraProdukt(produkt)){
-            logInfo(produkt.getNazwa() + " nie znajduje sie w katalogu lub jest niedostepny.");
-            return;
+    public void dodajProdukt(String nazwa, int ilosc){
+        Produkt produkt = katalog.znajdzProduktPoNazwie(nazwa);
+
+        if(produkt == null){
+            logInfo(nazwa + " nie istnieje w katalogu lub jest niedostępna/y");
         }
-        produkty.put(produkt, produkty.getOrDefault(produkt, 0) + 1);
+        produkty.put(produkt, produkty.getOrDefault(produkt,0) + ilosc);
     }
 
     public void usunProdukt(Produkt produkt){
@@ -31,6 +32,29 @@ public class Koszyk {
                 produkty.put(produkt, ilosc - 1);
             }
         }
+    }
+
+    public void wyswietlZawartosc(){
+        if (produkty.isEmpty()){
+            logInfo("Koszyk jest pusty");
+            return;
+        }
+        logInfo("================= TWÓJ KOSZYK ====================");
+        produkty.forEach((produkt, ilosc) -> logInfo(produkt.getNazwa() + ", " + ilosc + " szt."));
+    }
+
+    public double obliczCeneCalkowita(){
+        return produkty.entrySet().stream().mapToDouble(e -> e.getKey().getCena() * e.getValue())
+                .sum();
+    }
+
+    public void wyczyscKoszyk(){
+        produkty.clear();
+        logInfo("Koszyk został wyczyszczony.");
+    }
+
+    public Map<Produkt, Integer> getProdukty(){
+        return produkty;
     }
 
 }
